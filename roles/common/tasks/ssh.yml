@@ -2,16 +2,14 @@
 - name: Ensure ssh configuration directory exists (Linux)
   when: ansible_facts['os_family'] != 'Darwin'
   ansible.builtin.file:
-    path: '/home/{{ ansible_main_user }}/.ssh'
+    path: "/home/{{ ansible_main_user }}/.ssh"
     state: directory
-    mode: 0644
 
 - name: Ensure ssh configuration directory exists (MacOS)
   when: ansible_facts['os_family'] == 'Darwin'
   ansible.builtin.file:
-    path: '/Users/{{ ansible_user }}/.ssh'
+    path: "/Users/{{ ansible_user }}/.ssh"
     state: directory
-    mode: 0644
 
 # - name: Copy ssh config file (Linux)
 #   when: ansible_facts['os_family'] != 'Darwin'
@@ -29,29 +27,26 @@
 
 - name: Check if key exists ed25519 (Linux)
   when: ansible_facts['os_family'] != 'Darwin'
-  become:  "{{ ansible_user_id != 'root' }}"
+  become: "{{ ansible_user_id != 'root' }}"
   ansible.builtin.stat:
-    path: '/home/{{ ansible_main_user }}/.ssh/id_ed25519'
+    path: "/home/{{ ansible_main_user }}/.ssh/id_ed25519"
   register: ssh_key_stat_linux
 
-
 - name: Generate ssh key ed25519 (Linux)
-  when: 
+  when:
     - ansible_facts['os_family'] != 'Darwin'
     - not ssh_key_stat_linux.stat.exists
   ansible.builtin.command: 'ssh-keygen -t ed25519 -f /home/{{ ansible_main_user }}/.ssh/id_ed25519 -c {{ email | default("") }}'
-
 
 - name: Check if key exists ed25519 (MacOS)
   when: ansible_facts['os_family'] == 'Darwin'
   become: true
   ansible.builtin.stat:
-    path: '/Users/{{ ansible_user }}/.ssh/id_ed25519'
+    path: "/Users/{{ ansible_user }}/.ssh/id_ed25519"
   register: ssh_key_stat_mac
 
 - name: Generate ssh key ed25519 (MacOS)
-  when: 
+  when:
     - ansible_facts['os_family'] == 'Darwin'
     - not ssh_key_stat_mac.stat.exists
   ansible.builtin.command: 'ssh-keygen -t ed25519 -f /Users/{{ ansible_user }}/.ssh/id_ed25519 -c {{ email | default("") }}'
-
