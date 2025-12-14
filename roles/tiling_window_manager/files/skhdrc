@@ -1,0 +1,38 @@
+# Changing window focus
+cmd - up : yabai -m window --focus north
+cmd - right : yabai -m window --focus east
+cmd - down : yabai -m window --focus south
+cmd - left : yabai -m window --focus west
+
+cmd - 1 : yabai -m space --focus 1
+cmd - 2 : yabai -m space --focus 2
+cmd - 3 : yabai -m space --focus 3
+cmd - 4 : yabai -m space --focus 4
+cmd - 5 : yabai -m space --focus 5
+
+# swap focus
+cmd + ctrl - up : yabai -m window --swap north
+cmd + ctrl - down : yabai -m window --swap south 
+cmd + ctrl - left : yabai -m window --swap west 
+cmd + ctrl - right : yabai -m window --swap east
+
+cmd + ctrl - 1 : yabai -m window --space 1 && yabai -m space -- focus 1
+cmd + ctrl - 2 : yabai -m window --space 2 && yabai -m space -- focus 2
+cmd + ctrl - 3 : yabai -m window --space 3 && yabai -m space -- focus 3
+cmd + ctrl - 4 : yabai -m window --space 4 && yabai -m space -- focus 4
+cmd + ctrl - 5 : yabai -m window --space 5 && yabai -m space -- focus 5
+
+# rotate
+ctrl + cmd - x : yabai -m space --mirror x-axis
+ctrl + cmd - y : yabai -m space --mirror y-axis
+ctrl - f : yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+# max size
+ctrl - m : yabai -m window --toggle zoom-fullscreen
+# balance resize
+ctrl - e : yabai -m space --balance
+
+# shortcut
+ctrl + cmd - c : open -a "Visual Studio Code"
+ctrl + cmd - i : open -a "IntelliJ IDEA"
+ctrl + cmd - t : kitty -e btop

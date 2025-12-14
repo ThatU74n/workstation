@@ -1,0 +1,10 @@
+---
+- name: Download Docker - Homebrew (MacOS)
+  when: not docker_exists and homebrew_exists
+  community.general.homebrew:
+    name: docker 
+    state: present
+
+- name: Ensure Docker is running (MacOS)
+  ansible.builtin.shell: |
+    open --background -a Docker 

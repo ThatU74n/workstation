@@ -1,0 +1,6 @@
+require("core.plugin_config.lualine")
+require("core.plugin_config.nvim-tree")
+require("core.plugin_config.nvim-treesitter")
+require("core.plugin_config.lsp")
+require("core.plugin_config.conform")
+require("core.plugin_config.nvim-lint")

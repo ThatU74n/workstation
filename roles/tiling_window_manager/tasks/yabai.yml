@@ -1,0 +1,20 @@
+---
+- name: Ensure yabai (MacOS)
+  community.general.homebrew:
+    name: 'koekeishiya/formulae/yabai'
+    state: present
+
+- name: Ensure yabai config directory exists
+  ansible.builtin.file:
+    path: '/Users/{{ ansible_user }}/.config/yabai'
+    state: directory
+
+- name: Copy yabai config file
+  ansible.builtin.copy:
+    src: 'yabairc'
+    dest: '/Users/{{ ansible_user }}/.config/yabai/yabairc'
+    mode: 0644
+
+- name: Ensure skhd started (MacOS)
+  ansible.builtin.command: yabai --start-service
+  ignore_errors: true

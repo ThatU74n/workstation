@@ -1,0 +1,30 @@
+---
+- name: Ensure kitty config directory exists (Linux)
+  when: ansible_facts['os_family'] != 'Darwin'
+  ansible.builtin.file:
+    path: '/home/{{ ansible_main_user }}/.config/kitty'
+    state: directory
+    owner: '{{ ansible_main_user }}'
+    group: '{{ ansible_main_user }}'
+
+- name: Ensure kitty config directory exists (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  ansible.builtin.file:
+    path: '/Users/{{ ansible_user }}/.config/kitty'
+    state: directory
+
+- name: Copy kitty.conf (Linux)
+  when: ansible_facts['os_family'] != 'Darwin'
+  ansible.builtin.copy:
+    src: 'kitty.conf'
+    dest: '/home/{{ ansible_user }}/.config/kitty/kitty.conf'
+    owner: '{{ ansible_user }}'
+    group: '{{ ansible_user }}'
+    mode: '0644'
+
+- name: Copy kitty.conf (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  ansible.builtin.copy:
+    src: 'kitty.conf'
+    dest: '/Users/{{ ansible_user }}/.config/kitty/kitty.conf'
+    mode: '0644'

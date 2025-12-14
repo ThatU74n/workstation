@@ -1,0 +1,46 @@
+---
+- name: Ensure alias (Zsh)
+  when: ansible_facts.user_shell == '/bin/zsh'
+  ansible.builtin.blockinfile:
+    block: |
+      alias vi=nvim
+      alias vim=nvim
+    path: ~/.zshrc
+
+- name: Ensure alias (Bash)
+  when: ansible_facts.user_shell == '/bin/bash'
+  ansible.builtin.blockinfile:
+    block: |
+      alias vi=nvim
+      alias vim=nvim
+    path: ~/.bashrc
+
+- name: Ensure nvim config directory (Linux)
+  when: ansible_facts['os_family'] != 'Darwin'
+  ansible.builtin.file:
+    path: '/home/{{ ansible_main_user }}/.config/nvim/'
+    state: directory
+    owner: '{{ ansible_main_user }}'
+    group: '{{ ansible_main_user }}'
+
+- name: Ensure nvim config directory (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  ansible.builtin.file:
+    path: '/Users/{{ ansible_user }}/.config/nvim/'
+    state: directory
+
+- name: Copy config folder (Linux)
+  when: ansible_facts['os_family'] != 'Darwin'
+  ansible.builtin.copy:
+    src: files/
+    dest: '/home/{{ ansible_main_user }}/.config/nvim/'
+    mode: 0644
+    owner: '{{ ansible_main_user }}'
+    group: '{{ ansible_main_user }}'
+
+- name: Copy config folder (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  ansible.builtin.copy:
+    src: files/
+    dest: '/Users/{{ ansible_user }}/.config/nvim/'
+    mode: 0644

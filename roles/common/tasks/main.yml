@@ -1,0 +1,15 @@
+---
+- name: Ensure common configuration (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  import_tasks: darwin.yml
+
+- name: Ensure common configuration (Debian)
+  when: ansible_facts['os_family'] == 'Debian'
+  import_tasks: debian.yml
+
+- name: Ensure ssh configurations
+  import_tasks: ssh.yml
+
+- name: Ensure network configuration 
+  when: ansible_facts['os_family'] in ['Debian', 'Archlinux']
+  import_tasks: config_network.yml

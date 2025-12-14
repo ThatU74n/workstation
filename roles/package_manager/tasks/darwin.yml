@@ -1,0 +1,20 @@
+---
+- name: Check if Homebrew is installed (MacOS)
+  ansible.builtin.stat:
+    path: /opt/homebrew/bin/brew
+  register: homebrew_stat
+
+- ansible.builtin.set_fact:
+    homebrew_exists: "{{ homebrew_stat.stat.exists }}"
+
+- name: Install Homebrew (MacOS)
+  when: not homebrew_exists
+  ansible.builtin.shell: >
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+- name: Update Homebrew (MacOS)
+  community.general.homebrew:
+    update_homebrew: true
+
+
+

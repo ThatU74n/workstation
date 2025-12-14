@@ -1,0 +1,13 @@
+---
+- name: Setup workstation 
+  hosts: localhost
+  vars:
+    email: 'custom@gmail.com'
+  roles:
+    - package_manager
+    - common
+    - docker
+    - neovim
+    - kitty
+    - tiling_window_manager
+

@@ -1,0 +1,24 @@
+---
+- name: Ensure skhd (MacOS)
+  community.general.homebrew:
+    name: 'koekeishiya/formulae/skhd'
+    state: present
+
+- name: Ensure skhd config directory exists
+  ansible.builtin.file:
+    path: '/Users/{{ ansible_user }}/.config/skhd'
+    state: directory
+
+- name: Copy skhd config file
+  ansible.builtin.copy:
+    src: 'skhdrc'
+    dest: '/Users/{{ ansible_user }}/.config/skhd/skhdrc'
+    mode: 0644
+
+- name: Ensure skhd service (MacOS)
+  ansible.builtin.command: skhd --install-service
+  ignore_errors: true
+
+- name: Ensure skhd started (MacOS)
+  ansible.builtin.command: skhd --start-service
+  ignore_errors: true

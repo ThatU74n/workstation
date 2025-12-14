@@ -1,0 +1,13 @@
+---
+- name: Check docker installation 
+  command: docker --version
+  register: docker_exists
+  ignore_errors: true
+
+- name: Ensure Docker (Debian)
+  when: ansible_facts['os_family'] == 'Debian'
+  import_tasks: 'debian.yml'
+
+- name: Ensure Docker (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  import_tasks: darwin.yml

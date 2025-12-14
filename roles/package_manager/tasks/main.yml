@@ -1,0 +1,8 @@
+---
+- name: Ensure Homebrew (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  import_tasks: darwin.yml
+
+- name: Ensure apt-get (Debian)
+  when: ansible_facts['os_family'] == 'Debian'
+  import_tasks: debian.yml

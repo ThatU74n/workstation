@@ -1,0 +1,20 @@
+---
+- name: Ensure sudo privileges (1st run)
+  when: ansible_user_id == "root"
+  ansible.builtin.user:
+    name: "{{ ansible_main_user }}"
+    groups: sudo
+    append: yes
+    state: present
+    shell: /bin/bash
+
+- name: Copy ssh authorized keys (1st run)
+  when: ansible_user_id == "root"
+  ansible.builtin.copy:
+    src: /root/.ssh/authorized_keys
+    dest: "/home/{{ ansible_main_user }}/.ssh/authorized_keys"
+    owner: "{{ ansible_main_user }}"
+    group: "{{ ansible_main_user }}"
+    remote_src: true
+
+
