@@ -1,4 +1,0 @@
----
-ansible_user: tech3
-ansible_connection: ssh
-ansible_host: 172.16.2.57
