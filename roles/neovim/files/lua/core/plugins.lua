@@ -48,7 +48,9 @@ return require('packer').startup(
     use 'stevearc/conform.nvim'
 
     -- Copilot
+    use 'nvim-lua/plenary.nvim'
     use 'github/copilot.vim'
+    use 'olimorris/codecompanion.nvim'
 
     -- Theme
     use 'folke/tokyonight.nvim'

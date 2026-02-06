@@ -1,0 +1,38 @@
+[user]
+  name = {{ github_username }}
+  email = {{ github_email }}
+[core]
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  features = tokyo-night
+  side-by-side = true
+  navigate = true
+  line-numbers = true
+
+[delta "tokyo-night"]
+    syntax-theme = TokyoNight-Night
+    
+    line-numbers-minus-style = "#f7768e"
+    line-numbers-plus-style = "#9ece6a"
+    
+    # Diff background colors (Subtle neon backgrounds)
+    minus-style = syntax "#3b2735"       # Darker red/purple background
+    minus-emph-style = syntax "#612e3b"  # Bright red for specific changes
+    plus-style = syntax "#20303b"        # Darker teal/green background
+    plus-emph-style = syntax "#2e524d"   # Bright teal for specific changes
+    
+    # Header and Decoration
+    commit-decoration-style = "#7aa2f7" box
+    file-style = "#7aa2f7" bold
+    file-decoration-style = "#3b4261" overline
+    hunk-header-style = syntax bold italic
+
+[color]
+	ui = true
+[merge]
+  conflictstyle = zdiff3
+	tool = code

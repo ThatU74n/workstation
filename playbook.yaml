@@ -1,0 +1,22 @@
+---
+- name: Setup workstation
+  hosts: localhost
+  vars:
+    github_username: "utan"
+    github_email: "utan.dev2358@gmail.com"
+  tasks:
+    - name: Git
+      ansible.builtin.include_role:
+        name: git
+
+    - name: Neovim
+      ansible.builtin.include_role:
+        name: neovim
+
+    - name: Github
+      ansible.builtin.include_role:
+        name: github
+
+    - name: PGCLI
+      ansible.builtin.include_role:
+        name: pgcli

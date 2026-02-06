@@ -1,0 +1,38 @@
+---
+- name: Ensure pgcli (Debian)
+  when: ansible_facts['os_family'] == "Debian"
+  become: true
+  ansible.builtin.apt:
+    name:
+      - pgcli
+      - python3
+    state: present
+
+- name: Ensure pgcli (ArchLinux)
+  when: ansible_facts['os_family'] == "Archlinux"
+  become: true
+  ansible.builtin.pacman:
+    name:
+      - pgcli
+      - python3
+    state: present
+
+- name: Ensure pgcli (MacOS)
+  when: ansible_facts['os_family'] == "Darwin"
+  community.general.homebrew:
+    name:
+      - pgcli
+      - python3
+    state: present
+
+- name: Ensure pgcli config directory
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/pgcli"
+    state: directory
+    mode: "0755"
+
+- name: Copy pgcli config
+  ansible.builtin.copy:
+    src: config
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/pgcli/config"
+    mode: "0644"

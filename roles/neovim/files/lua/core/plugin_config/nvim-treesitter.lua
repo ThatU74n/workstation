@@ -10,8 +10,6 @@ require('nvim-treesitter.configs').setup {
     "bash",
     "typescript",
     "tsx",
-    "prisma",
-    "java",
     "terraform",
     "ssh_config",
     "nginx",

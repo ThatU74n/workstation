@@ -1,6 +1,4 @@
 ---
 ansible_user:
-ansible_main_user: # for 1st run sudo setup
 ansible_host:
 ansible_connection: ssh
-ansible_common_args: "-o StrictHostKeyChecking=no"

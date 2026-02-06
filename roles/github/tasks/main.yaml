@@ -1,0 +1,54 @@
+---
+- name: Ensure gh (Debian)
+  when: ansible_facts['os_family'] == "Debian"
+  become: true
+  ansible.builtin.apt:
+    name:
+      - gh
+      - git-delta
+    state: present
+
+- name: Ensure gh (ArchLinux)
+  when: ansible_facts['os_family'] == "Archlinux"
+  become: true
+  ansible.builtin.pacman:
+    name:
+      - gh
+      - git-delta
+    state: present
+
+- name: Ensure gh (MacOS)
+  when: ansible_facts['os_family'] == "Darwin"
+  community.general.homebrew:
+    name:
+      - gh
+      - git-delta
+    state: present
+
+- name: Ensure gh config directory
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/gh"
+    state: directory
+    mode: "0755"
+
+- name: Copy gh config
+  ansible.builtin.copy:
+    src: gh_config.yaml
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/gh/config.yml"
+    mode: "0644"
+
+- name: Ensure alias (Bash)
+  when: "'bash' in ansible_facts['env']['SHELL']"
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
+    line: 'alias pr="gh pr create --draft --base develop --editor --template PULL_REQUEST_TEMPLATE.md"'
+    state: present
+    mark: "# {mark} Ansible managed alias for gh pr create"
+
+- name: Ensure alias (Zsh)
+  when: "'zsh' in ansible_facts['env']['SHELL']"
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts['env']['HOME'] }}/.zshrc"
+    line: 'alias pr="gh pr create --draft --base develop --editor --template PULL_REQUEST_TEMPLATE.md"'
+    regexp: "^alias pr="
+    state: present
