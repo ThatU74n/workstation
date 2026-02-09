@@ -42,8 +42,8 @@
   ansible.builtin.lineinfile:
     path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     line: 'alias pr="gh pr create --draft --base develop --editor --template PULL_REQUEST_TEMPLATE.md"'
+    regexp: "^alias pr="
     state: present
-    mark: "# {mark} Ansible managed alias for gh pr create"
 
 - name: Ensure alias (Zsh)
   when: "'zsh' in ansible_facts['env']['SHELL']"

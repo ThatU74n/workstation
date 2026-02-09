@@ -5,9 +5,21 @@
     github_username: "utan"
     github_email: "utan.dev2358@gmail.com"
   tasks:
+    - name: Background
+      ansible.builtin.include_role:
+        name: background
+
     - name: Git
       ansible.builtin.include_role:
         name: git
+
+    - name: Fastfetch
+      ansible.builtin.include_role:
+        name: fastfetch
+
+    - name: Starship
+      ansible.builtin.include_role:
+        name: starship
 
     - name: Neovim
       ansible.builtin.include_role:

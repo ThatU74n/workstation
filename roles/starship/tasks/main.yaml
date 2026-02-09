@@ -1,0 +1,34 @@
+---
+- name: Ensure starship (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  community.general.homebrew:
+    name: starship
+    state: present
+
+- name: Ensure starship config directory
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config"
+    state: directory
+    mode: "0755"
+
+- name: Copy starship config
+  ansible.builtin.copy:
+    src: starship.toml
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/starship.toml"
+    mode: "0644"
+
+- name: Ensure starship init (Bash)
+  when: "'bash' in ansible_facts['env']['SHELL']"
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
+    line: 'eval "$(starship init bash)"'
+    regexp: "eval \"\\$\\(starship init bash\\)\""
+    state: present
+
+- name: Ensure starship init (Zsh)
+  when: "'zsh' in ansible_facts['env']['SHELL']"
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts['env']['HOME'] }}/.zshrc"
+    line: 'eval "$(starship init zsh)"'
+    regexp: "eval \"\\$\\(starship init zsh\\)\""
+    state: present

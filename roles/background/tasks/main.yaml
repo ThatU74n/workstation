@@ -1,0 +1,12 @@
+---
+- name: Ensure Pictures directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/Pictures"
+    state: directory
+    mode: "0755"
+
+- name: Copy wallpaper
+  ansible.builtin.copy:
+    src: wallpaper.jpg
+    dest: "{{ ansible_facts['env']['HOME'] }}/Pictures/wallpaper.jpg"
+    mode: "0644"
