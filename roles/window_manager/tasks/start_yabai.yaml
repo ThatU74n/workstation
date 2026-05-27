@@ -1,0 +1,9 @@
+- name: Start yabai
+  ansible.builtin.command:
+    cmd: yabai --start-service
+    creates: "/tmp/yabai_started"
+
+- name: Start skhd
+  ansible.builtin.command:
+    cmd: skhd --start-service
+    creates: "/tmp/skhd_started"

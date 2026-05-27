@@ -1,0 +1,32 @@
+---
+- name: Configure workstation
+  hosts: workstation
+  pre_tasks:
+    - name: Update apt cache
+      when: ansible_facts['os_family'] == "Debian"
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Update dnf cache
+      when: ansible_facts['os_family'] == "RedHat"
+      ansible.builtin.dnf:
+        update_cache: true
+
+  tasks:
+    - name: Configure Window Manager
+      ansible.builtin.include_role:
+        name: window_manager
+      vars:
+        window_manager_wm: yabai
+
+    - name: Configure Kitty
+      ansible.builtin.include_role:
+        name: kitty
+
+    - name: Configure Fastfetch
+      ansible.builtin.include_role:
+        name: fastfetch
+
+    - name: Configure Neovim
+      ansible.builtin.include_role:
+        name: neovim

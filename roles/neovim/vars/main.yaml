@@ -1,0 +1,9 @@
+---
+_neovim_packages:
+  - rsync           # For ansible.posix.synchronize
+  - tree-sitter-cli # For nvim-treesitter
+  - ripgrep         # For telescope live_grep
+  - prettier        # For conform with typescript
+  - neovim
+
+_neovim_shell_profile: "{{ ansible_facts['env']['HOME'] }}/.{{ ansible_facts['env']['SHELL'] | basename }}rc"

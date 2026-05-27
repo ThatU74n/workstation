@@ -1,0 +1,9 @@
+---
+- name: Install
+  ansible.builtin.import_tasks: "install_{{ window_manager_wm }}.yaml"
+
+- name: Configure
+  ansible.builtin.import_tasks: "configure_{{ window_manager_wm }}.yaml"
+
+- name: Start
+  ansible.builtin.import_tasks: "start_{{ window_manager_wm }}.yaml"

@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: U74n
+  description: "Role to install and configure Tiling Window Manager"
+  min_ansible_version: "2.2"
+  license: MIT
+argument_specs:
+  main:
+    options:
+      window_manager_wm:
+        type: str
+        description: "Window manager to install and configure"
+        required: true
+        choices:
+          - "yabai"

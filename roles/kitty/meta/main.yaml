@@ -1,0 +1,13 @@
+---
+galaxy_info:
+  author: U74n
+  description: "Role to install and configure Kitty terminal emulator. Tailor made for personal workstation setup"
+  min_ansible_version: "2.2"
+  license: MIT
+argument_specs:
+  main:
+    options:
+      kitty_transparent:
+        type: str
+        description: "Whether to enable transparency in Kitty terminal"
+        default: true

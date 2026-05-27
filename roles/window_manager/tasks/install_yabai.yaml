@@ -1,0 +1,17 @@
+---
+- name: Install Yabai (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  community.general.homebrew:
+    name: "{{ _window_manager_yabai_homebrew_packages }}"
+    state: present
+
+- name: Ensure directory
+  loop:
+    - "{{ ansible_facts['env']['HOME'] }}/.config/yabai"
+    - "{{ ansible_facts['env']['HOME'] }}/.config/skhd"
+  loop_control:
+    loop_var: path
+  ansible.builtin.file:
+    path: "{{ path }}"
+    state: directory
+    mode: "0755"

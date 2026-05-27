@@ -1,0 +1,6 @@
+---
+_kitty_packages:
+  - kitty
+
+_kitty_brew_cask:
+  - font-jetbrains-mono-nerd-font

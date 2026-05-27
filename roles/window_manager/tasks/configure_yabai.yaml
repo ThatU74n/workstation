@@ -1,0 +1,12 @@
+---
+- name: Copy yabai configuration
+  ansible.builtin.copy:
+    src: "yabai/yabairc"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/yabai/.yabairc"
+    mode: "0755"
+
+- name: Copy skhd configuration
+  ansible.builtin.copy:
+    src: "yabai/skhdrc"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/skhd/.skhdrc"
+    mode: "0755"

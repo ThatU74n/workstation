@@ -1,0 +1,6 @@
+---
+- name: Copy kitty configuration
+  ansible.builtin.template:
+    src: kitty.conf.jinja
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/kitty/kitty.conf"
+    mode: "0644"

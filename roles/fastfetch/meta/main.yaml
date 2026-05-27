@@ -1,0 +1,6 @@
+---
+galaxy_info:
+  author: U74n
+  description: "Role to install and configure Fastfetch. Tailor made for personal workstation setup"
+  min_ansible_version: "2.2"
+  license: MIT

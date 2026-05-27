@@ -1,0 +1,12 @@
+---
+- name: Copy Logo
+  ansible.builtin.copy:
+    src: logo.gif
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/fastfetch/logo.gif"
+    mode: "0644"
+
+- name: Copy Fastfetch configuration
+  ansible.builtin.copy:
+    src: config.jsonc
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/fastfetch/config.jsonc"
+    mode: "0644"

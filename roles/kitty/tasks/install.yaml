@@ -1,0 +1,20 @@
+---
+- name: Install Kitty (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  block:
+    - name: Install Cellar
+      community.general.homebrew:
+        name: "{{ _kitty_packages }}"
+        state: present
+
+    - name: Install Cask
+      community.general.homebrew_cask:
+        name: "{{ _kitty_brew_cask }}"
+        state: present
+        options:
+
+- name: Ensure directory
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/kitty"
+    state: directory
+    mode: "0755"

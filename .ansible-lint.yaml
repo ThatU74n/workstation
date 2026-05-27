@@ -5,4 +5,4 @@ exclude_paths:
   - .github/
   - .gitea/
   - .git/
-  - ./roles/neovim/
+  - ./roles/neovim/files/

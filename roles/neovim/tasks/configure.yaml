@@ -1,0 +1,20 @@
+---
+- name: Copy config files
+  ansible.posix.synchronize:
+    src: files/
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/nvim/"
+    recursive: true
+    rsync_opts:
+      - "--exclude=.git"
+      - "--exclude=.gitea"
+
+- name: Ensure alias
+  ansible.builtin.blockinfile:
+    path: "{{ _neovim_shell_profile }}"
+    create: true
+    block: |
+      alias vim="nvim"
+      alias vi="nvim"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    owner: "{{ ansible_facts['env']['USER'] }}"
+    mode: "0644"

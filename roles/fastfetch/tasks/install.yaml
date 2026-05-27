@@ -1,0 +1,12 @@
+---
+- name: Install Fastfetch (MacOS)
+  when: ansible_facts['os_family'] == 'Darwin'
+  community.general.homebrew:
+    name: "{{ _fastfetch_packages }}"
+    state: present
+
+- name: Ensure directory
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/fastfetch"
+    state: directory
+    mode: "0755"
