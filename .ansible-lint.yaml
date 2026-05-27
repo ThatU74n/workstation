@@ -1,0 +1,8 @@
+skip_list:
+  - yaml[line-length]-l
+
+exclude_paths:
+  - .github/
+  - .gitea/
+  - .git/
+  - ./roles/neovim/
