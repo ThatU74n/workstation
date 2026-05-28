@@ -1,0 +1,6 @@
+---
+galaxy_info:
+  author: U74n
+  description: "Role to install and configure Github CLI. Tailor made for personal workstation setup"
+  license: MIT
+  min_ansible_version: "2.2"

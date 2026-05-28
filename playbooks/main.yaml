@@ -13,6 +13,14 @@
         update_cache: true
 
   tasks:
+    - name: Configure Git
+      ansible.builtin.include_role:
+        name: git
+
+    - name: Configure Github CLI
+      ansible.builtin.include_role:
+        name: gh
+
     - name: Configure Window Manager
       ansible.builtin.include_role:
         name: window_manager

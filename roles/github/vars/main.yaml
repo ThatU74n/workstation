@@ -1,0 +1,1 @@
+_github_shell_profile: "{{ ansible_facts['env']['HOME'] }}/.{{ ansible_facts['env']['SHELL'] | basename }}rc"

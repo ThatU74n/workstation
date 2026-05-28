@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: U74n
+  description: "Role to install and configure Git. Tailor made for my workstation setup"
+  min_ansible_version: "2.2"
+  license: MIT
+argument_specs:
+  main:
+    options:
+      git_user_name:
+        type: str
+        description: "Git user name to be set in the global configuration"
+        required: true
+
+      git_user_email:
+        type: str
+        description: "Git user email to be set in the global configuration"
+        required: true
